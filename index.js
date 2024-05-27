@@ -28,11 +28,13 @@ const level = (difficulty) => {
       </label>
   `);
 };
-const setting = () => {
+const setting = (start) => {
   $(`#settingUp`).empty();
   $(`#settingUp`).append(`
     <a href='/'><button class="btn btn-secondary"> Reset</button></a>
-    <button class="btn btn-secondary" id="start"> Start!</button>
+    <button class="btn btn-secondary" id="start">${
+      start == "restart" ? "Restart!" : "Start!"
+    }</button>
   `);
 };
 const paginate = async (pokemons, difficulty) => {
@@ -93,9 +95,16 @@ const setup = async () => {
     level(difficulty);
   });
   $("body").on("click", "#start", function () {
+    setting("restart");
     $(`#game_grid`).empty();
     paginate(pokemons, difficulty);
     $(`#game_grid`).addClass(difficulty);
+  });
+  $("body").on("click", "#dark", function() {
+    $(`body`).addClass("dark")
+  });
+  $("body").on("click", "#light", function () {
+    $(`body`).removeClass("dark");
   });
 };
 

@@ -1,9 +1,12 @@
 body {
   margin: 0px;
 }
-
+.center {
+    margin: auto;
+    width: 60%;
+    padding: 10px;
+}
 .easy {
-  border: 2px tomato solid;
   width: 800px;
   height: 400px;
   margin: auto;
@@ -12,7 +15,6 @@ body {
 }
 
 .medium {
-  border: 2px tomato solid;
   width: 800px;
   height: 800px;
   margin: auto;
@@ -21,12 +23,14 @@ body {
 }
 
 .hard {
-  border: 2px tomato solid;
   width: 800px;
   height: 1600px;
   margin: auto;
   display: flex;
   flex-wrap: wrap;
+}
+.dark {
+  background-color: black;
 }
 
 .card {
