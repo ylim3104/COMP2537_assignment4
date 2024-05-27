@@ -1,13 +1,9 @@
 body {
   margin: 0px;
 }
-
-.center {
-  margin: auto;
-  width: 60%;
-  padding: 10px;
+h1 {
+  margin: 300px;
 }
-
 .easy {
   width: 800px;
   height: 400px;
