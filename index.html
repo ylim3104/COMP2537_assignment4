@@ -1,39 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  
-  <!-- import axios -->
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- import axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css"
-    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-  <!-- import jQuery -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="index.js"></script>
-</head>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css"
+      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+      crossorigin="anonymous"
+    />
+    <!-- import jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="index.js"></script>
+  </head>
 
-<body>
-  <div class="text-center"> 
-  <section id="difficulty" class="btn-group btn-group-toggle m-3" data-toggle="buttons"></section>
-  <br>
-  <section id="settingUp" class="btn-group m-3"></section>
-  <br>
-  <section id="info"></section>
-  <br>
-  <div id="game_grid"></div>
-  <br>
-  <section id="themes">
-    <button id="dark" class="btn btn-dark"> Dark </button>
-    <button id="light" class="btn btn-light"> light </button>
-  </section>
-  </div>
-  <br>
-</body>
-
+  <body>
+    <div class="text-center">
+      <header>
+        <section
+          id="difficulty"
+          class="btn-group btn-group-toggle m-3"
+          data-toggle="buttons"
+        ></section>
+        <br />
+        <section id="settingUp" class="btn-group m-3"></section>
+        <br />
+        <section id="info">
+          <h1>Total Number of Pairs <span id="total"></span></h1>
+          <h1>Number of Matches <span id="matches"></span></h1>
+          <h1>Number of pair left <span id="left"></span></h1>
+          <h1>Number of Clicks <span id="clicks"></span></h1>
+          <h1>
+            You got <span id="timer"> </span> seconds.
+            <span id="time"></span> second<span id="s">s</span> passed!
+          </h1>
+        </section>
+      </header>
+      <br />
+      <div id="game_grid"></div>
+      <br />
+      <section id="themes">
+        <button id="dark" class="btn btn-dark">Dark</button>
+        <button id="light" class="btn btn-light">light</button>
+      </section>
+    </div>
+    <br />
+  </body>
 </html>

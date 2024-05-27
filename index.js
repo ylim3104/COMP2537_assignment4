@@ -3,15 +3,20 @@ let difficulty;
 let pokemonNum = 0;
 let previousNum = 1;
 let selected_pokemons = [];
-let cards;
+let pairs;
 let firstCard = undefined;
 let secondCard = undefined;
-let gridLevel;
+let timer;
+let clicks = 0;
+let matches = 0;
+let sec = 0;
 
 function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-function handler() {
+
+async function handler() {
+  clicks++;
   $(this).toggleClass("flip");
   if (!firstCard) firstCard = $(this).find(".front_face")[0];
   else {
@@ -23,6 +28,7 @@ function handler() {
       $(`#${secondCard.id}`).parent().off("click");
       firstCard = undefined;
       secondCard = undefined;
+      matches++;
     } else {
       console.log("no match");
       setTimeout(() => {
@@ -33,6 +39,7 @@ function handler() {
       }, 1000);
     }
   }
+  await information(pairs, matches, clicks);
 }
 
 const level = (difficulty) => {
@@ -60,16 +67,52 @@ const setting = (start) => {
     }</button>
   `);
 };
+
+const information = async (total, matches, clicks) => {
+  if (total == 4) {
+    timer = 100;
+  } else if (total == 8) {
+    timer = 200;
+  } else {
+    timer = 300;
+  }
+  $(`#total`).empty();
+  $(`#matches`).empty();
+  $(`#left`).empty();
+  $(`#clicks`).empty();
+  $(`#timer`).empty();
+  $(`#total`).append(`${total}`);
+  $(`#matches`).append(`${matches}`);
+  $(`#left`).append(`${total - matches}`);
+  $(`#clicks`).append(`${clicks}`);
+  $(`#timer`).append(`${timer}`);
+};
+
+const content = $("#s").html();
+const time = setInterval(function () {
+  sec++;
+  $(`#time`).empty();
+  $(`#time`).append(`${sec}`);
+  if (sec <= 1) {
+    $(`#s`).empty();
+  } else {
+    $("#s").html(content);
+  }
+  if (sec >= timer) {
+    clearInterval(time);
+  }
+}, 1000);
+
 const paginate = async (pokemons, difficulty) => {
   if (difficulty == "easy") {
-    cards = 8;
+    pairs = 4;
   } else if (difficulty == "medium") {
-    cards = 16;
+    pairs = 8;
   } else {
-    cards = 32;
+    pairs = 16;
   }
   let selectedIndices = new Set();
-  while (selectedIndices.size < cards / 2) {
+  while (selectedIndices.size < pairs) {
     selectedIndices.add(getRandomNumber(0, pokemons.length - 1));
   }
   selected_pokemons = Array.from(selectedIndices).map(
@@ -90,7 +133,10 @@ const paginate = async (pokemons, difficulty) => {
     i++;
   });
 };
+
 const setup = async () => {
+  var originalContent = $("#info").html();
+  $(`#info`).empty();
   level();
   let response = await axios.get(
     "https://pokeapi.co/api/v2/pokemon?offset=0&limit=1302"
@@ -98,34 +144,41 @@ const setup = async () => {
   pokemons = response.data.results;
   $("body").on("click", ".pokeCard", handler);
   $("body").on("click", "#option1", function () {
-      setting();
+    setting();
+    $(`#info`).empty();
     $("#game_grid").empty();
     $(`#game_grid`).removeClass(difficulty);
     difficulty = "easy";
     level(difficulty);
   });
   $("body").on("click", "#option2", function () {
-      setting();
+    setting();
+    $(`#info`).empty();
     $("#game_grid").empty();
     $(`#game_grid`).removeClass(difficulty);
     difficulty = "medium";
     level(difficulty);
   });
   $("body").on("click", "#option3", function () {
-      setting();
+    setting();
+    $(`#info`).empty();
     $("#game_grid").empty();
     $(`#game_grid`).removeClass(difficulty);
     difficulty = "hard";
     level(difficulty);
   });
-  $("body").on("click", "#start", function () {
+  $("body").on("click", "#start", async function () {
     setting("restart");
     $(`#game_grid`).empty();
+    $("#info").html(originalContent);
+    time;
+    sec = 0;
     paginate(pokemons, difficulty);
     $(`#game_grid`).addClass(difficulty);
+    await information(pairs, matches, clicks);
   });
-  $("body").on("click", "#dark", function() {
-    $(`body`).addClass("dark")
+  $("body").on("click", "#dark", function () {
+    $(`body`).addClass("dark");
   });
   $("body").on("click", "#light", function () {
     $(`body`).removeClass("dark");
