@@ -2,7 +2,7 @@ body {
   margin: 0px;
 }
 
-.game_grid_easy {
+.easy {
   border: 2px tomato solid;
   width: 800px;
   height: 400px;
@@ -11,7 +11,7 @@ body {
   flex-wrap: wrap;
 }
 
-.game_grid_medium {
+.medium {
   border: 2px tomato solid;
   width: 800px;
   height: 800px;
@@ -20,7 +20,7 @@ body {
   flex-wrap: wrap;
 }
 
-.game_grid_hard {
+.hard {
   border: 2px tomato solid;
   width: 800px;
   height: 1600px;

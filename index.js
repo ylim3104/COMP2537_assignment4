@@ -6,6 +6,7 @@ let selected_pokemons = [];
 let cards;
 let firstCard = undefined;
 let secondCard = undefined;
+let gridLevel;
 
 function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -17,12 +18,21 @@ const level = (difficulty) => {
       <label class="btn btn-secondary ${difficulty == "easy" ? "active" : ""}">
         <input type="radio" value="easy" name="options" id="option1" autocomplete="off"> Easy
       </label>
-      <label class="btn btn-secondary ${difficulty == "medium" ? "active" : ""}">
+      <label class="btn btn-secondary ${
+        difficulty == "medium" ? "active" : ""
+      }">
         <input type="radio" value="medium" name="options" id="option2" autocomplete="off"> Medium
       </label>
       <label class="btn btn-secondary ${difficulty == "hard" ? "active" : ""}">
         <input type="radio" value="hard" name="options" id="option3" autocomplete="off"> Hard
       </label>
+  `);
+};
+const setting = () => {
+  $(`#settingUp`).empty();
+  $(`#settingUp`).append(`
+    <a href='/'><button class="btn btn-secondary"> Reset</button></a>
+    <button class="btn btn-secondary" id="start"> Start!</button>
   `);
 };
 const paginate = async (pokemons, difficulty) => {
@@ -62,28 +72,30 @@ const setup = async () => {
   );
   pokemons = response.data.results;
   $("body").on("click", "#option1", function () {
-    $(`#game_grid`).removeClass("game_grid_medium");
-    $(`#game_grid`).removeClass("game_grid_hard");
+      setting();
+    $("#game_grid").empty();
+    $(`#game_grid`).removeClass(difficulty);
     difficulty = "easy";
     level(difficulty);
-    paginate(pokemons, difficulty);
-    $(`#game_grid`).addClass("game_grid_easy");
   });
   $("body").on("click", "#option2", function () {
-    $(`#game_grid`).removeClass("game_grid_easy");
-    $(`#game_grid`).removeClass("game_grid_hard");
+      setting();
+    $("#game_grid").empty();
+    $(`#game_grid`).removeClass(difficulty);
     difficulty = "medium";
     level(difficulty);
-    paginate(pokemons, difficulty);
-    $(`#game_grid`).addClass("game_grid_medium");
   });
   $("body").on("click", "#option3", function () {
-    $(`#game_grid`).removeClass("game_grid_easy");
-    $(`#game_grid`).removeClass("game_grid_medium");
+      setting();
+    $("#game_grid").empty();
+    $(`#game_grid`).removeClass(difficulty);
     difficulty = "hard";
     level(difficulty);
+  });
+  $("body").on("click", "#start", function () {
+    $(`#game_grid`).empty();
     paginate(pokemons, difficulty);
-    $(`#game_grid`).addClass("game_grid_hard");
+    $(`#game_grid`).addClass(difficulty);
   });
 };
 
