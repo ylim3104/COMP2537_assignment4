@@ -11,15 +11,30 @@
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
   <link rel="stylesheet" href="style.css">
-
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
   <!-- import jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="index.js"></script>
 </head>
 
 <body>
-  <div id="game_grid">
-  </div>
+      <div id="difficulty" class="btn-group btn-group-toggle m-3" data-toggle="buttons">
+    </div>
+    <br>
+    <a href='/'><button class="btn btn-secondary"> Reset</button></a>
+    <button class="btn btn-secondary" id="start"> Start!</button>
+    <section id="info">
+    </section>
+  </header>
+  <div id="level"></div>
+  <div id="settingUp"></div>
+  <div id="heading"></div>
+  <div id="game_grid"></div>
+  <section id="themes" class="text-center">
+    <button id="dark" class="btn btn-dark"> Dark </button>
+    <button id="light" class="btn btn-light"> light </button>
+  </section>
 </body>
 
 </html>

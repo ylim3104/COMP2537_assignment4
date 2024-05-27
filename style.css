@@ -2,7 +2,7 @@ body {
   margin: 0px;
 }
 
-#game_grid {
+.game_grid_easy {
   border: 2px tomato solid;
   width: 800px;
   height: 400px;
@@ -11,6 +11,23 @@ body {
   flex-wrap: wrap;
 }
 
+.game_grid_medium {
+  border: 2px tomato solid;
+  width: 800px;
+  height: 800px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.game_grid_hard {
+  border: 2px tomato solid;
+  width: 800px;
+  height: 1600px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
 
 .card {
   width: 25%;
@@ -39,3 +56,4 @@ img {
 .front_face {
   transform: rotateY(180deg);
 }
+
