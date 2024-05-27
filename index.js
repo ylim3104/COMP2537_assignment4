@@ -59,7 +59,9 @@ async function handler() {
       matches++;
       lockBoard = false; // Unlock the board
       if (matches == pairs) {
-        alert("You win");
+        setTimeout(() => {
+          alert("You win");
+        }, 1000);
         clearInterval(time); // Stop the timer if the player wins
       }
     } else {
@@ -76,6 +78,7 @@ async function handler() {
   clicks++;
   if (clicks % 10 === 0) {
     activatePowerUp();
+    alert("power up!");
   }
   await information(pairs, matches, clicks);
 }
