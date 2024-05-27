@@ -11,6 +11,29 @@ let gridLevel;
 function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+function handler() {
+  $(this).toggleClass("flip");
+  if (!firstCard) firstCard = $(this).find(".front_face")[0];
+  else {
+    secondCard = $(this).find(".front_face")[0];
+    console.log(firstCard, secondCard);
+    if (firstCard.src == secondCard.src) {
+      console.log("match");
+      $(`#${firstCard.id}`).parent().off("click");
+      $(`#${secondCard.id}`).parent().off("click");
+      firstCard = undefined;
+      secondCard = undefined;
+    } else {
+      console.log("no match");
+      setTimeout(() => {
+        $(`#${firstCard.id}`).parent().toggleClass("flip");
+        $(`#${secondCard.id}`).parent().toggleClass("flip");
+        firstCard = undefined;
+        secondCard = undefined;
+      }, 1000);
+    }
+  }
+}
 
 const level = (difficulty) => {
   $(`#difficulty`).empty();
@@ -59,7 +82,7 @@ const paginate = async (pokemons, difficulty) => {
   selected_pokemons.forEach(async (pokemon) => {
     const res = await axios.get(pokemon.url);
     $("#game_grid").append(`
-      <div class="card">
+      <div class="pokeCard">
         <img id="img${i}" class="front_face" src="${res.data.sprites.front_default}" alt="${res.data.name}">
         <img class="back_face" src="back.webp" alt="">
       </div>
@@ -73,6 +96,7 @@ const setup = async () => {
     "https://pokeapi.co/api/v2/pokemon?offset=0&limit=1302"
   );
   pokemons = response.data.results;
+  $("body").on("click", ".pokeCard", handler);
   $("body").on("click", "#option1", function () {
       setting();
     $("#game_grid").empty();
