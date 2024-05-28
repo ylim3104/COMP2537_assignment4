@@ -40,12 +40,6 @@ const activatePowerUp = () => {
 };
 
 async function handler() {
-    await information(pairs, matches, clicks);
-    if (clicks % 10 === 0) {
-      alert("power up!");
-      activatePowerUp();
-    }
-    clicks++;
   if (lockBoard) return; // Prevent other cards from flipping during match check
   if ($(this).hasClass("flip")) return; // Prevent flipping if card is already flipped
 
@@ -81,6 +75,14 @@ async function handler() {
       }, 1000);
     }
   }
+    clicks++;
+  if (clicks % 10 === 0) {
+    setTimeout(() => {
+    alert("power up!");
+    activatePowerUp();
+    }, 1000);
+  }
+  await information(pairs, matches, clicks);
 }
 
 const level = (difficulty) => {
@@ -125,8 +127,8 @@ const startTimer = () => {
   time = setInterval(function () {
     sec++;
     $(`#time`).empty().append(`${sec}`);
-    if (sec > 1) {
-      $(`#s`).empty().append(`s`);
+    if(sec > 1) {
+      $(`#s`).empty().append(`s`)
     } else {
       $(`#s`).empty();
     }
