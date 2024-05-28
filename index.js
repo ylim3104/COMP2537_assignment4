@@ -125,6 +125,11 @@ const startTimer = () => {
   time = setInterval(function () {
     sec++;
     $(`#time`).empty().append(`${sec}`);
+    if(sec > 1) {
+      $(`#s`).empty().append(`s`)
+    } else {
+      $(`#s`).empty();
+    }
     if (sec > timer) {
       clearInterval(time);
       lose();
